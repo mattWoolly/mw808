@@ -1,0 +1,4 @@
+2026-10-03T05:59:09Z (entry written by hand: blessed before this log existed)	mwoolly	all	51 case(s)	initial blessing of the golden corpus (tools bring-up); metal voices, clap and maracas are still under review and will be re-blessed by the integrator
+2026-10-03T06:08Z~ (entry written by hand: blessed before this log existed)	mwoolly	_(cy|oh|ch|cb|cp|ma)_|^pattern_	23 case(s)	metal voices (cymbal, hats) changed under review; subset re-bless of metal/clap/maracas voices and all patterns
+2026-10-03T06:09:22Z	mwoolly	all	51 case(s)	hand-off snapshot by the tools engineer; metal voices (CY OH CH CB) and CP/MA still under review, integrator re-blesses at the end
+2026-10-03T12:48:01Z	mwoolly	all	51 case(s)	metal voices (cymbal, hats, cowbell), clap and maracas changed by their review; engine now always renders the metal voices; re-bless of the whole corpus by the tools engineer

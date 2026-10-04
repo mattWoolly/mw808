@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# mw808 — classic analog drum machine emulation. Copyright (C) 2026 mwAudio.
+#
+# Golden pattern: every voice, every step feature. Weak/normal/accent levels,
+# the accent row, flams, x2..x4 sub-steps, probability, shuffle, a polymeter
+# track (CB loops every 12 steps) and a different B variation.
+name     golden full
+length   16
+scale    16
+shuffle  45
+tempo    150
+tracklength CB 12
+
+variation A
+BD  X--- --x- --x- -o--
+SD  ---- X(f)--- ---- x--x(2)
+LT  ---- ---- --x- --o-
+MT  ---- ---- -x-- ----
+HT  ---- ---- x--- ----
+LC  --o- ---- ---- x---
+MC  ---- --o- ---- ----
+HC  ---x ---- ---x ----
+RS  ---- ---x ---- ---x(p3)
+CL  -x-- ---- -x-- ----
+CP  ---- x--- ---- X(f)---
+MA  xoxo xoxo xoxo xoxo
+CB  --x- --x- --X-
+CY  x--- ---- ---- ----
+OH  ---- ---- ---- --x-
+CH  x-x- x-x(3)- x-x- x---
+AC  x--- ---- x--- ---x
+
+variation B
+BD  X--- --x- --X(f)- -x(2)--
+SD  ---- X--- ---- X(4)---
+CP  ---- x--- ---- x---
+CH  xxxx xxxx xxxx xx--
+OH  ---- ---- ---- --X-
+CY  ---- ---- ---- ---x
+LT  ---- ---- ---- x(3)---
+AC  ---- x--- ---- x---

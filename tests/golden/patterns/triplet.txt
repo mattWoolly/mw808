@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# mw808 — classic analog drum machine emulation. Copyright (C) 2026 mwAudio.
+#
+# Golden pattern: eighth-triplet scale (pre-scale 1), 12 steps, toms, congas,
+# rim shot, claves, cowbell and maracas.
+name     golden triplet
+length   12
+scale    8t
+shuffle  0
+tempo    110
+BD  x-- --- x-- ---
+LT  --- --x --- ---
+MT  --- -x- --- ---
+HT  --- x-- --- ---
+LC  --x --- --x --o
+MC  -o- --- -o- ---
+HC  --- --- --- x-x
+RS  --- --- --- --X
+CL  x-- x-- x-- x--
+CB  --- --- X-- ---
+MA  oxo oxo oxo oxo
+AC  x-- --- --- ---

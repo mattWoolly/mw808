@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# mw808 — classic analog drum machine emulation. Copyright (C) 2026 mwAudio.
+#
+# Golden pattern: a plain kick/snare/hats/clap beat with the accent row.
+name     golden basic
+length   16
+scale    16
+shuffle  0
+tempo    150
+BD  x--- ---- x-x- ----
+SD  ---- x--- ---- x---
+CH  x-x- x-x- x-x- x---
+OH  ---- ---- ---- --x-
+CP  ---- ---- ---- x---
+AC  x--- ---- x--- ----

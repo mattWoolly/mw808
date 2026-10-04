@@ -1,0 +1,100 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": { "major": 3, "minor": 25, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Linux" }
+    },
+    {
+      "name": "linux-release",
+      "inherits": "base",
+      "displayName": "Linux Release (Ninja)",
+      "description": "Optimised build (-O3, LTO on the plugin targets). Use it for installs (tools/install-user.sh), benchmarks (mw808-render bench) and validators.",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    },
+    {
+      "name": "linux-default",
+      "inherits": "base",
+      "displayName": "Linux development (RelWithDebInfo, Ninja)",
+      "description": "Day-to-day development build with debug info.",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "RelWithDebInfo" }
+    },
+    {
+      "name": "asan",
+      "inherits": "base",
+      "displayName": "AddressSanitizer + UBSan (core, tools, tests; no plugin)",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "MW808_BUILD_PLUGIN": "OFF",
+        "CMAKE_C_FLAGS": "-fsanitize=address,undefined -fno-omit-frame-pointer -fno-sanitize-recover=undefined -g",
+        "CMAKE_CXX_FLAGS": "-fsanitize=address,undefined -fno-omit-frame-pointer -fno-sanitize-recover=undefined -g",
+        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address,undefined",
+        "CMAKE_SHARED_LINKER_FLAGS": "-fsanitize=address,undefined"
+      }
+    },
+    {
+      "name": "tsan",
+      "inherits": "base",
+      "displayName": "ThreadSanitizer (core, tools, tests; no plugin)",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "MW808_BUILD_PLUGIN": "OFF",
+        "CMAKE_C_FLAGS": "-fsanitize=thread -fno-omit-frame-pointer -g",
+        "CMAKE_CXX_FLAGS": "-fsanitize=thread -fno-omit-frame-pointer -g",
+        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=thread",
+        "CMAKE_SHARED_LINKER_FLAGS": "-fsanitize=thread"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "linux-release", "configurePreset": "linux-release" },
+    { "name": "linux-default", "configurePreset": "linux-default" },
+    { "name": "asan", "configurePreset": "asan" },
+    { "name": "tsan", "configurePreset": "tsan" }
+  ],
+  "testPresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "output": { "outputOnFailure": true },
+      "execution": { "noTestsAction": "error" }
+    },
+    { "name": "linux-release", "inherits": "base", "configurePreset": "linux-release" },
+    { "name": "linux-default", "inherits": "base", "configurePreset": "linux-default" },
+    {
+      "name": "asan",
+      "inherits": "base",
+      "configurePreset": "asan",
+      "filter": { "exclude": { "label": "validators" } },
+      "environment": {
+        "ASAN_OPTIONS": "detect_leaks=1:abort_on_error=1",
+        "UBSAN_OPTIONS": "print_stacktrace=1:halt_on_error=1"
+      }
+    },
+    {
+      "name": "tsan",
+      "inherits": "base",
+      "configurePreset": "tsan",
+      "filter": { "exclude": { "label": "validators" } },
+      "environment": { "TSAN_OPTIONS": "halt_on_error=1:second_deadlock_stack=1" }
+    },
+    {
+      "name": "golden",
+      "inherits": "base",
+      "displayName": "Golden renders only (linux-release)",
+      "configurePreset": "linux-release",
+      "filter": { "include": { "label": "golden" } }
+    },
+    {
+      "name": "validators",
+      "inherits": "base",
+      "displayName": "Format validators only (linux-release; exit 77 = skipped)",
+      "configurePreset": "linux-release",
+      "filter": { "include": { "label": "validators" } }
+    }
+  ]
+}
